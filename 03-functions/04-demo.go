@@ -13,8 +13,8 @@ func main() {
 
 }
 
-func process(fn func(int, int) int, x, y int) {
-	fmt.Println("Processing 2 numbers")
+func process(msg string, fn func(int, int) int, x, y int) {
+	fmt.Println("Adding 2 numbers")
 	result := fn(x, y)
 	fmt.Println("Result:", result)
 
