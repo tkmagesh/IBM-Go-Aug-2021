@@ -17,15 +17,15 @@ func main() {
 	fmt.Println(decrement()) //=> -1
 }
 
-func getCounter() (func() int, func() int) {
-	counter := 0
-	increment := func() int {
-		counter++
+func getCounter() (func() int, func() int) { //step - 1
+	counter := 0              //stop - 2
+	increment := func() int { //step - 3
+		counter++ //step - 4
 		return counter
 	}
-	decrement := func() int {
-		counter--
+	decrement := func() int { //step - 3
+		counter-- //step - 4
 		return counter
 	}
-	return increment, decrement
+	return increment, decrement //step - 5
 }
