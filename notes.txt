@@ -93,3 +93,8 @@ Menu
 
 For choice 1 - 4, accept 2 numbers, perform the operation, display the result & show the menu again
 For choice 5 - exit from the application
+
+
+Assignment : 2
+ Refactor Assignment : 1 using functions
+ 
