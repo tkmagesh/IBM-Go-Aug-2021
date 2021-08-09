@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+//var appName string = "My App"
+var appName = "My App"
+
 func main() {
 	/*
 		var msg string
@@ -85,4 +88,6 @@ func main() {
 
 	label, x, y := "Add Result :", 100, 200
 	fmt.Println(label, x+y)
+
+	fmt.Println(appName)
 }
