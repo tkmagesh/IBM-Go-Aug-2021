@@ -101,4 +101,10 @@ Assignment : 2
 
 Functions
     - Variadic functions
-    
+    - Higher order functions
+        Functions can be treated like data
+            - Assign a function to a variable
+            - Pass a function as an argument to another function
+            - Return a function as a return value from another function
+
+            
