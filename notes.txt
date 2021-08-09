@@ -97,4 +97,8 @@ For choice 5 - exit from the application
 
 Assignment : 2
  Refactor Assignment : 1 using functions
- 
+
+
+Functions
+    - Variadic functions
+    
