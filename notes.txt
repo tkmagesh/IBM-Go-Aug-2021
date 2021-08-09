@@ -15,5 +15,71 @@ Primary Skillset
 Experience in Golang (if any)
 Any interesting books you read / shows you watched recently
 
+Golang
+    Why Golang?
+        - Simplicity
+        - Easy to build concurrent applications
+        - Fast
+
+    Simplicity
+        - No classes
+        - No inheritance (only composition)
+        - No Exceptions (only errors)
+        - No access modifiers (public, private, protected)
+
+        ONLY 25 keywords
+
+    Built for concurrency
+        - Builtin Scheduler
+        - goroutines
+        - OS thread (2 MB), Goroutine (4 KB)
+        - Language features for concurrency
+            go, chan, select, range
+
+    Strongly Typed
+    Compiled
+    Performance is comparable to C
+    Garbage Collector
+    No Runtime (JVM, CLR)
+    Support for pointers
+    Everything is 'by value' by default (References are handled using pointers)
+
+Barry Shwartz
+    The Paradox of Choice (TED talk)
+    https://www.youtube.com/watch?v=VO6XEQIsCoM&t=12s
+
+http://www.golang.org
+http://code.visualstudio.com
+
+Go application
+    Modules & Packages
+
+Data types
+    bool
+    string
+
+    int
+    int8
+    int16
+    int32
+    int64
+
+    uint
+    uint8
+    uint16
+    uint32
+    uint64
+
+    float32
+    float64
+
+    complex64 (real float32, imaginary float32)
+    complex128 (real float64, imaginary float64)
+
+    byte (alias for uint8)
+    rune (alias for int32) (represents a unicode code point)
+    
+
+
 
 
