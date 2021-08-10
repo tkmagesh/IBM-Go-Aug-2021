@@ -124,5 +124,33 @@ for ex:
 
 output : 3 letter words with 12 occurances
 
+Modules & Packages
+
+go.mod
+
+creating a module
+go mod init <module_name>
+
+GOROOT
+GOPATH
+
+Before Go 1.13 (NO module support)
+    GOPATH
+        pkg
+        bin
+        src
+            github.com
+                tkmagesh
+                    repo_name (application)
+                        main.go
 
             
+Installing 3rd party packages
+    go get github.com/fatih/color
+
+To create a build
+    go build .
+    go build -o modularity-app
+
+To create a vendor folder
+    go mod vendor
