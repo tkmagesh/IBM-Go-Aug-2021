@@ -107,4 +107,11 @@ Functions
             - Pass a function as an argument to another function
             - Return a function as a return value from another function
 
+Collections
+    - Arrays
+    - Slices
+    - Maps
+
+
+
             
