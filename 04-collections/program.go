@@ -27,4 +27,28 @@ func main() {
 	newNos := nos
 	nos[0] = 200
 	fmt.Println(nos, newNos)
+
+	//Slices
+	//var names []string
+	var names []string = []string{"Magesh", "Ramesh", "Suresh"}
+	fmt.Println(names)
+
+	//names = append(names, "Rajesh")
+	//names = append(names, "Rajesh", "Ganesh")
+	newNames := []string{"Rajesh", "Ganesh"}
+	names = append(names, newNames...)
+	fmt.Println(names)
+
+	//slicing
+	/*
+		[lo : hi] => from lo to hi-1
+		[lo : ] => from lo to the end
+		[ : hi] => from the beginning to hi-1
+		[lo : lo] => empty slice
+		[lo : lo+1] == [lo]
+		[:] => copy of the slice
+	*/
+	fmt.Println("[1:3] => ", names[1:3])
+	fmt.Println("[3:] => ", names[3:])
+	fmt.Println("[:3] => ", names[:3])
 }
