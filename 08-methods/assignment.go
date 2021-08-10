@@ -12,6 +12,19 @@ type Product struct {
 
 type Products []Product
 
+//composition
+type PerishableProduct struct {
+	Product
+	Expiry string
+}
+
+func NewPerishableProduct(id int, name string, cost float64, units int, category string, expiry string) *PerishableProduct {
+	return &PerishableProduct{Product{id, name, cost, units, category}, expiry}
+}
+
+//type aliasing
+type MyProduct Product
+
 func main() {
 	products := Products{
 		{105, "Pen", 5, 50, "Stationary"},
@@ -62,11 +75,25 @@ func main() {
 
 	//Are all the products in the collection are stationary products?
 	fmt.Println("Are all the products in the collection are stationary products ? => ", products.All(stationaryProductPredicate))
+
+	//Create a new perishable product
+	grapes := NewPerishableProduct(102, "Grapes", 50, 5, "Food", "2 Days")
+	fmt.Println(grapes.Format())
+
+	//create a new MyProduct
+	myProduct := MyProduct(Product{102, "Grapes", 50, 5, "Food"})
+	p := Product(myProduct)
+	fmt.Println(p.Format())
 }
 
 //Method of product
 func (product *Product) Format() string {
 	return fmt.Sprintf("Id = %d, Name = %s, Cost = %v, Units = %d, Category = %s", product.Id, product.Name, product.Cost, product.Units, product.Category)
+}
+
+//Method of PerishableProduct
+func (perishableProduct *PerishableProduct) Format() string {
+	return fmt.Sprintf("%s, Expiry=%s", perishableProduct.Product.Format(), perishableProduct.Expiry)
 }
 
 //Method of []Product
