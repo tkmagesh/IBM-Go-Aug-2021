@@ -10,75 +10,77 @@ type Product struct {
 	Category string
 }
 
+type Products []Product
+
 func main() {
-	products := []Product{
-		Product{105, "Pen", 5, 50, "Stationary"},
-		Product{107, "Pencil", 2, 100, "Stationary"},
-		Product{103, "Marker", 50, 20, "Utencil"},
-		Product{102, "Stove", 5000, 5, "Utencil"},
-		Product{101, "Kettle", 2500, 10, "Utencil"},
-		Product{104, "Scribble Pad", 20, 20, "Stationary"},
+	products := Products{
+		{105, "Pen", 5, 50, "Stationary"},
+		{107, "Pencil", 2, 100, "Stationary"},
+		{103, "Marker", 50, 20, "Utencil"},
+		{102, "Stove", 5000, 5, "Utencil"},
+		{101, "Kettle", 2500, 10, "Utencil"},
+		{104, "Scribble Pad", 20, 20, "Stationary"},
 	}
 
 	dummyProduct := Product{Name: "Dummy"}
 	fmt.Println("IndexOf Function")
-	fmt.Println("Index of Marker => ", IndexOf(products, Product{103, "Marker", 50, 20, "Utencil"}))
-	fmt.Println("Index of Dummy => ", IndexOf(products, dummyProduct))
+	fmt.Println("Index of Marker => ", products.IndexOf(Product{103, "Marker", 50, 20, "Utencil"}))
+	fmt.Println("Index of Dummy => ", products.IndexOf(dummyProduct))
 
 	fmt.Println()
 	fmt.Println("Includes Function")
-	fmt.Println("Includes Marker ? => ", Includes(products, Product{103, "Marker", 50, 20, "Utencil"}))
-	fmt.Println("Includes Dummy ? => ", Includes(products, dummyProduct))
+	fmt.Println("Includes Marker ? => ", products.Includes(Product{103, "Marker", 50, 20, "Utencil"}))
+	fmt.Println("Includes Dummy ? => ", products.Includes(dummyProduct))
 
 	fmt.Println()
 	fmt.Println("Filter function")
 	stationaryProductPredicate := func(product Product) bool {
 		return product.Category == "Stationary"
 	}
-	stationaryProducts := Filter(products, stationaryProductPredicate)
+	stationaryProducts := products.Filter(stationaryProductPredicate)
 	fmt.Println("Stationary Products => ")
-	fmt.Println(FormatProducts(stationaryProducts))
+	fmt.Println(stationaryProducts.Format())
 
 	costlyProductPredicate := func(product Product) bool {
 		return product.Cost > 100
 	}
-	costlyProducts := Filter(products, costlyProductPredicate)
+	costlyProducts := products.Filter(costlyProductPredicate)
 	fmt.Println("Costly Products => ")
-	fmt.Println(FormatProducts(costlyProducts))
+	fmt.Println(costlyProducts.Format())
 
 	fmt.Println()
 	fmt.Println("Any function")
 	// Are there any costly product?
-	fmt.Println("Are there any stationary products ? => ", Any(products, stationaryProductPredicate))
+	fmt.Println("Are there any stationary products ? => ", products.Any(stationaryProductPredicate))
 	// Are thery any stationary products?
-	fmt.Println("Are there any costly products ? => ", Any(products, costlyProductPredicate))
+	fmt.Println("Are there any costly products ? => ", products.Any(costlyProductPredicate))
 
 	fmt.Println()
 	fmt.Println("All function")
 	//Are all the products in the collection are costly products?
-	fmt.Println("Are all the products in the collection are costly products ? => ", All(products, costlyProductPredicate))
+	fmt.Println("Are all the products in the collection are costly products ? => ", products.All(costlyProductPredicate))
 
 	//Are all the products in the collection are stationary products?
-	fmt.Println("Are all the products in the collection are stationary products ? => ", All(products, stationaryProductPredicate))
+	fmt.Println("Are all the products in the collection are stationary products ? => ", products.All(stationaryProductPredicate))
 }
 
 //Method of product
-func Format(product Product) string {
+func (product *Product) Format() string {
 	return fmt.Sprintf("Id = %d, Name = %s, Cost = %v, Units = %d, Category = %s", product.Id, product.Name, product.Cost, product.Units, product.Category)
 }
 
 //Method of []Product
-func FormatProducts(products []Product) string {
+func (products Products) Format() string {
 	var result string
 	for _, p := range products {
-		result += Format(p) + "\n"
+		result += p.Format() + "\n"
 	}
 	return result
 }
 
 //Method of []Product
 //IndexOf => returns the index of the given product in the products collections (-1 if it doesnt exist)
-func IndexOf(products []Product, product Product) int {
+func (products Products) IndexOf(product Product) int {
 	for i, p := range products {
 		if p == product {
 			return i
@@ -89,8 +91,8 @@ func IndexOf(products []Product, product Product) int {
 
 //Method of []Product
 //Includes => return true/false based on the existence of the product in the products collection
-func Includes(products []Product, product Product) bool {
-	return IndexOf(products, product) != -1
+func (products Products) Includes(product Product) bool {
+	return products.IndexOf(product) != -1
 }
 
 //Filter => returns a new collection of products that match the given criteria
@@ -98,8 +100,8 @@ func Includes(products []Product, product Product) bool {
 
 //filter costly products (cost > 100)
 //Method of []Product
-func Filter(products []Product, predicate func(Product) bool) []Product {
-	var result []Product
+func (products Products) Filter(predicate func(Product) bool) Products {
+	var result Products
 	for _, p := range products {
 		if predicate(p) {
 			result = append(result, p)
@@ -110,7 +112,7 @@ func Filter(products []Product, predicate func(Product) bool) []Product {
 
 //Method of []Product
 //Any => return true/false based on the existence of the given product that satisfies the given criteria in the products collection
-func Any(products []Product, predicate func(Product) bool) bool {
+func (products Products) Any(predicate func(Product) bool) bool {
 	for _, p := range products {
 		if predicate(p) {
 			return true
@@ -123,7 +125,7 @@ func Any(products []Product, predicate func(Product) bool) bool {
 
 //Method of []Product
 //All => return true/false based on the existence of all the given products that satisfy the given criteria in the products collection
-func All(products []Product, predicate func(Product) bool) bool {
+func (products Products) All(predicate func(Product) bool) bool {
 	for _, p := range products {
 		if !predicate(p) {
 			return false
