@@ -29,9 +29,8 @@ func sum(nos ...interface{}) int {
 				result += val
 			}
 		case []int:
-			noList := no.([]int)
-			intfList := make([]interface{}, len(noList))
-			for idx, x := range noList {
+			intfList := make([]interface{}, len(v))
+			for idx, x := range v {
 				intfList[idx] = x
 			}
 			result += sum(intfList...)
