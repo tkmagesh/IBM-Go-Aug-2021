@@ -18,7 +18,6 @@ func main() {
 }
 
 func sum(nos ...interface{}) int {
-
 	result := 0
 	for _, no := range nos {
 		switch v := no.(type) {
