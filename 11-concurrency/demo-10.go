@@ -6,14 +6,21 @@ import (
 )
 
 func main() {
-	Print("Hello", 2*time.Second)
-	Print("world", 3*time.Second)
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+	go Print("Hello", 2*time.Second, ch1, ch2)
+	go Print("world", 3*time.Second, ch2, ch1)
+	ch1 <- 1
+	var input string
+	fmt.Scanln(&input)
 }
 
-func Print(str string, delay time.Duration) {
+func Print(str string, delay time.Duration, ch1, ch2 chan int) {
 	for i := 0; i < 5; i++ {
+		<-ch1
 		time.Sleep(delay)
 		fmt.Println(str)
+		ch2 <- 1
 	}
 }
 
