@@ -169,3 +169,8 @@ io packages
     os
     ioutil
     bufio
+
+
+generating race reports
+    go build --race  demo-04.go
+    
