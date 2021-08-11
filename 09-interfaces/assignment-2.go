@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 type Product struct {
 	Id       int
@@ -11,6 +14,28 @@ type Product struct {
 }
 
 type Products []Product
+
+func (p Products) Len() int { return len(p) }
+func (p Products) Less(i, j int) bool {
+	return p[i].Id < p[j].Id
+}
+func (p Products) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+
+func (p Products) Sort() {
+	sort.Sort(p)
+}
+
+type ByName struct {
+	Products
+}
+
+func (p ByName) Less(i, j int) bool {
+	return p.Products[i].Name < p.Products[j].Name
+}
+
+func (p Products) SortByName() {
+	sort.Sort(ByName{p})
+}
 
 func main() {
 	products := Products{
@@ -24,6 +49,15 @@ func main() {
 	fmt.Println("Initial List")
 	fmt.Println(products)
 
+	fmt.Println()
+	fmt.Println("Default sort")
+	products.Sort()
+	fmt.Println(products)
+
+	fmt.Println()
+	fmt.Println("Sort By Name")
+	products.SortByName()
+	fmt.Println(products)
 	//Sort the products by any attribute
 	//IMPORTANT : Do NOT implement your own sorting logic. Use "sort" package functions
 	//HINT : look at sort.Sort() function
