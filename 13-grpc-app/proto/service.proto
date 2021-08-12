@@ -22,6 +22,20 @@ message AverageResponse{
     int64 result = 1;
 }
 
+//server streaming
+message PrimeRange{
+    int64 start = 1;
+    int64 end = 2;
+}
+
+message PrimeRequest{
+    PrimeRange pRange = 1;
+}
+
+message PrimeResponse{
+    int64 no = 1;
+}
+
 //service
 service AppService{
     
@@ -30,4 +44,7 @@ service AppService{
 
     //client streaming
     rpc Average(stream AverageRequest) returns (AverageResponse);
+
+    //server streaming
+    rpc Prime(PrimeRequest) returns (stream PrimeResponse);
 }

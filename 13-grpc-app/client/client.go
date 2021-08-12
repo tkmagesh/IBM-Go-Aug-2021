@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"grpc-app/proto"
+	"io"
 	"log"
 	"time"
 
@@ -19,8 +20,33 @@ func main() {
 
 	clientConn := proto.NewAppServiceClient(client)
 	//doRequestResponse(clientConn)
-	doClientStreaming(clientConn)
+	//doClientStreaming(clientConn)
+	doServerStreaming(clientConn)
 
+}
+
+func doServerStreaming(clientConn proto.AppServiceClient) {
+	pRange := &proto.PrimeRange{
+		Start: 3,
+		End:   100,
+	}
+	primeReq := &proto.PrimeRequest{
+		PRange: pRange,
+	}
+	stream, err := clientConn.Prime(context.Background(), primeReq)
+	if err != nil {
+		log.Fatalf("%v.Prime(_) = _, %v", clientConn, err)
+	}
+	for {
+		pr, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("%v.Recv() = _, %v", stream, err)
+		}
+		fmt.Println("Prime No : ", pr.GetNo())
+	}
 }
 
 //client streaming
