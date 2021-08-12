@@ -174,3 +174,26 @@ io packages
 generating race reports
     go build --race  demo-04.go
     
+
+gRPC
+    1. HTTP2
+    2. Real time updates
+    3. Serialization using protocol buffers
+
+    Communication Patterns
+        1. Request Response
+        2. Client Streaming
+        3. Server Streaming
+        4. Bidirectional Streaming
+        
+brew install protobuf
+brew install protoc-gen-go
+brew install protoc-gen-go-grpc
+
+protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative helloworld/helloworld.proto
+
+
+In the application folder
+    go get google.golang.org/grpc
+    go get google.golang.org/protobuf/reflect/protoreflect@v1.25.0
+    go get google.golang.org/protobuf/runtime/protoimpl@v1.25.0
